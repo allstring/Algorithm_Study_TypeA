@@ -21,9 +21,11 @@ def bfs(arr, x, y):
 
             if not (0 <= nx < m and 0 <= ny < n):
                 continue
-            if arr[nx][ny] == 1:
-                arr[nx][ny] = 0
-                queue.append((nx, ny))
+            if arr[nx][ny] == 0:
+                continue
+
+            arr[nx][ny] = 0
+            queue.append((nx, ny))
 
 T = int(input())
 
