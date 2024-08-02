@@ -15,7 +15,7 @@ def dfs(task, task_dict, completed):
         a_task = task_dict[task].pop()
         if a_task not in completed:
             task_cnt += 1
-            completed_task.add(a_task)
+            completed.add(a_task)
             dfs(a_task, task_dict, completed)
 
 
@@ -31,6 +31,8 @@ X = int(input())  # 민상이가 오늘 반드시 끝내야 하는 작업
 
 # 민상이가 작업 X를 하기 위해 먼저 해야하는 일의 개수
 task_cnt = 0
+# 완료한 일 집합
 completed_task = set()
+# completed_task.add(X)
 dfs(X, tasks, completed_task)
 print(task_cnt)
