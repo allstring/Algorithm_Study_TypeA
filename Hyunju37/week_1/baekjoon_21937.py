@@ -1,13 +1,6 @@
 from collections import defaultdict
 def count_prereqs(graph, start):
     # Using Recursion => RecursionError
-    '''global visited
-    visited.add(start)
-    for req in graph[start]:
-        if req not in visited:
-            global count
-            count += 1
-            count_prereqs(graph, req)'''
 
     # Using stack
     visited = set()
@@ -18,6 +11,7 @@ def count_prereqs(graph, start):
         visited.add(current)
         for req in graph[current]:
             if req not in visited:
+                visited.add(req)
                 count += 1
                 stack.append(req)
 
@@ -34,7 +28,5 @@ for _ in range(M):
 
 X = int(input())
 
-#visited = set()
-#count = 0
 ans = count_prereqs(task_graph, X)
 print(ans)
