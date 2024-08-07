@@ -23,8 +23,6 @@ hr, hc = 0, C-1
 
 def dfs(r, c, dist):
     global cnt
-    if dist >= K and (r != hr or c != hc):  # K 이상 움직였는데, 집이 아닌 경우
-        return
     if dist == K and (r == hr and c == hc):  # K 거리 움직였을 때, 집인 경우
         cnt += 1  # 카운트 + 1 해주고 반환
         return
