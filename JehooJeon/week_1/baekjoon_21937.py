@@ -1,8 +1,8 @@
 # 21937. 작업
 
 
-import sys
-sys.stdin = open("input.txt", "r")
+# import sys
+# sys.stdin = open("input.txt", "r")
 
 def dfs(current, visited):
     global count
@@ -10,12 +10,12 @@ def dfs(current, visited):
     # 현재 위치 방문 표시
     visited[current] = True
 
-    for idx, value in enumerate(work_seq):
-        if visited[idx]:
+    for value in work_seq[current]:
+        if visited[value]:
             continue
-        if current in value:
-            count += 1
-            dfs(idx, visited)
+        count += 1
+        dfs(value, visited)
+
 
 T = int(input())
 
@@ -26,7 +26,7 @@ for _ in range(T):
     work_seq = [[] for _ in range(n)]
     for _ in range(m):
         i, j = map(int, input().split())
-        work_seq[i - 1].append(j - 1)
+        work_seq[j - 1].append(i - 1)
     # visited: 방문 체크
     visited = [False] * n
     # x: 반드시 끝내야 하는 작업
