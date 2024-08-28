@@ -11,12 +11,14 @@ def main():
             for dx, dy in directions:
                 nx, ny = cx + dx, cy + dy
                 #queue.append((nx, ny))
-                while 0 <= nx < N and 0 <= ny < M:
-                    if map_copy[nx][ny] == 1:
-                        break
-                    map_copy[nx][ny] = 2
-                    nx += dx #원래 이동하던 방향으로 한 칸 더
-                    ny += dy #원래 이동하던 방향으로 한 칸 더
+                if 0 <= nx < N and 0 <= ny < M:
+                    '''if map_copy[nx][ny] == 1:
+                        break'''
+                    if map_copy[nx][ny] == 0:
+                        map_copy[nx][ny] = 2
+                        queue.append((nx, ny)) #추가
+                        #nx += dx #원래 이동하던 방향으로 한 칸 더
+                        #ny += dy #원래 이동하던 방향으로 한 칸 더
 
     N, M = map(int, input().split())
     v_map = [list(map(int, input().split())) for _ in range(N)]
