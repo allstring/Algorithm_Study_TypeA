@@ -6,20 +6,19 @@ def bfs(start, end, graph, n):
     visited[start] = 0  # 방문 처리
     
     while queue:
-        # print(queue)
         current = queue.popleft()  
-        # print(current)
         
         for neighbor in graph[current]:
-            if visited[neighbor] == -1: 
-                visited[neighbor] = visited[current] + 1  
+            if visited[neighbor] == -1: # 아직 방문 안했으면
+                visited[neighbor] = visited[current] + 1  # 현재 노드까지 거리 ++해서 이웃 노드 거리 설정
                 queue.append(neighbor)
     
+    # 목표 노드 거리 반환
     return visited[end]  
 
-n = int(input()) 
+n = int(input()) # 사람(노드)
 start, end = map(int, input().split())  
-m = int(input())  
+m = int(input()) # 관계(간선)
 graph = [[] for _ in range(n + 1)]
 
 
