@@ -13,12 +13,12 @@ def union(parent, rank, x, y):
             parent[rootY] = rootX
         elif rank[rootX] < rank[rootY]:
             parent[rootX] = rootY
-        else:
+        else: # 랭크가 같으면 한 쪽을 루트로 설정하고 랭크++
             parent[rootY] = rootX
             rank[rootX] += 1
 
-n = int(input())  # 컴퓨터의 수
-m = int(input())  # 연결할 수 있는 간선의 수
+n = int(input())  # 컴퓨터 수
+m = int(input())  # 연결할 수 있는 간선 수
 
 edges = [] 
 
@@ -31,21 +31,19 @@ edges.sort()
 
 parent = [i for i in range(n + 1)]
 rank = [0] * (n + 1)
-
-# 크루스칼 알고리즘
-mst_cost = 0 
-count = 0 
+mst_cost = 0 # 결과값
+count = 0 # 채택 간선 수
 
 for edge in edges:
     w, u, v = edge
     
-    # 두 노드가 같은 집합에 속하지 않는 경우에만 선택
+    # 두 노드가 같은 집합에 속하지 않는 경우에 간선 선택
     if find(parent, u) != find(parent, v):
         union(parent, rank, u, v)
-        mst_cost += w
-        count += 1
+        mst_cost += w # 가중치 증가
+        count += 1 # 간선 수 ++
     
-    # 모든 노드를 연결했으면 종료
+    # 다 연결했으면 종료
     if count == n - 1:
         break
 
