@@ -8,9 +8,6 @@ def is_valid(pos):
     # 좌표 유효성 검사
     if r < 0 or r >= N or c < 0 or c >= M:
         return False
-    # # 방문 췍
-    # if visited[r][c]:
-    #     return False
     # 토마토 췍
     if box[r][c] != 0:
         return False
@@ -39,7 +36,6 @@ def dfs(coord_list, day):
         for dr, dc in directions:  # 인접한 4 방향에 대해서 확인
             nr, nc = cr + dr, cc + dc   # 인접 좌표
             if is_valid((nr, nc)):
-                # visited[nr][nc] = True  # 방문 췍
                 box[nr][nc] = 1
                 new_ripe_tomato.append((nr, nc))  # 오늘 익은 토마토 좌표 추가
 
@@ -49,7 +45,6 @@ def dfs(coord_list, day):
 
 def main():
     global N, M, box, EMPTY
-    # global visited
 
     M, N = map(int, input().split())  # N x M 상자의 크기 [2, 1000]
     box = [list(map(int, input().split())) for _ in range(N)]
@@ -59,7 +54,6 @@ def main():
         print(0)
         return
 
-    # visited = [[False for _ in range(M)] for _ in range(N)]
     ripe_tomatoes = list()  # 익은 토마토들의 좌표
     for r in range(N):
         for c in range(M):
@@ -73,7 +67,6 @@ def main():
 
 if __name__ == "__main__":
     N, M =  0, 0
-    # visited = []
     box = []
     EMPTY = 0
     main()
