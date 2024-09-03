@@ -17,26 +17,24 @@ def union(parent, rank, x, y):
             parent[rootY] = rootX
             rank[rootX] += 1
 
-# 입력 처리
-n = int(input())  # 컴퓨터의 수 (노드 수)
+n = int(input())  # 컴퓨터의 수
 m = int(input())  # 연결할 수 있는 간선의 수
 
-edges = []  # 간선 정보를 저장할 리스트
+edges = [] 
 
 for _ in range(m):
     u, v, w = map(int, input().split())
-    edges.append((w, u, v))  # 가중치, 시작 노드, 끝 노드 순으로 저장
+    edges.append((w, u, v)) 
 
 # 간선을 가중치 순으로 정렬
 edges.sort()
 
-# 유니온 파인드 초기화
 parent = [i for i in range(n + 1)]
 rank = [0] * (n + 1)
 
-# 크루스칼 알고리즘 수행
-mst_cost = 0  # 최소 스패닝 트리의 비용
-count = 0  # 선택한 간선의 개수
+# 크루스칼 알고리즘
+mst_cost = 0 
+count = 0 
 
 for edge in edges:
     w, u, v = edge
@@ -51,5 +49,4 @@ for edge in edges:
     if count == n - 1:
         break
 
-# 결과 출력
 print(mst_cost)
