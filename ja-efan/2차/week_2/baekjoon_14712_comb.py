@@ -90,10 +90,10 @@ def main():
 
 if __name__ == "__main__":
     # 5 5 기준 약 200초
-    import time
-    start = time.time()
+    # import time
+    # start = time.time()
     N, M = 0, 0
     grid = list()
     main()
-    end = time.time()
+    # end = time.time()
     # print(f"{end - start:.5f} sec")
