@@ -1,3 +1,7 @@
+# 트리의 지름
+# Gold IV
+
+
 from collections import defaultdict
 import sys
 
@@ -31,19 +35,14 @@ def dfs(current_vertex, acc_weight, ):
     if not edges[current_vertex]:
         if diameter < acc_weight:
             diameter = acc_weight
-            # print(f"paths: {paths}, diameter: {diameter}")
             vertex_A = current_vertex
             return
     # 인접한 정점을 모두 방문한 경우
     if is_all_visited(vertex=current_vertex):
         if diameter < acc_weight:
             diameter = acc_weight
-            # print(f"paths: {paths}, diameter: {diameter}")
             vertex_A = current_vertex
             return
-
-    # # 현재 정점을 방문 처리
-    # visited.add(current_vertex)
 
     # 인접한 정점에 대하여 백트래킹
     adj_list = edges[current_vertex]
@@ -58,36 +57,22 @@ def dfs(current_vertex, acc_weight, ):
         visited.remove(adj_vertex)
 
 
-# 1. 루트(1)에서 가장 먼 노드를 찾는다.
-# -> 내려갈 때마다 weight를 누적해준다.
-
 def main():
     global edges, visited
 
     N = int(input())
     edges = defaultdict(list)
-    # weights_from_root = defaultdict(int)
-    # weights_from_root[1] = 0
     for _ in range(N - 1):
         p, c, w = map(int, input().split())
-        # edges.append((p, c, w))
         edges[p].append((c, w))
-        # weights_from_root[c] = weights_from_root[p] + w
         edges[c].append((p, w))
 
-    # print(edges)
-
-    # weights_from_root = list(sorted(weights_from_root.items(), key=lambda x: x[1], reverse=True))
-    # print(weights_from_root)
-
-
-    # 루트(1)에서 가장 먼 노드 A
-    # vertex_A = weights_from_root[0][0]
+    # root(1)에서 가장 먼 노드 찾기: vertex_A
     visited.add(1)
     dfs(current_vertex=1, acc_weight=0)
-    # print(vertex_A)
     visited.remove(1)
-    ####################################################
+
+    # vertex_A에서 가장 먼 노드 찾아서 지름(diameter) 갱신 DFS
     visited.add(vertex_A)
     init_weight = 0
     dfs(current_vertex=vertex_A, acc_weight=init_weight)
