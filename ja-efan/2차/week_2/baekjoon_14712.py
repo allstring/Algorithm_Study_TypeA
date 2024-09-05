@@ -89,6 +89,7 @@ def main():
 
 
 if __name__ == "__main__":
+    # 5 5 기준 약 200초
     import time
     start = time.time()
     N, M = 0, 0
