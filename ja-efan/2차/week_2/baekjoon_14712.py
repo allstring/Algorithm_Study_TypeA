@@ -1,7 +1,9 @@
 # 넴모넴모(Easy)
 # Gold V
+# Combination
 
 from itertools import combinations
+from pprint import pprint
 
 """
 격자판의 비어 있는 칸을 임의로 골라 “넴모”를 하나 올려놓거나,
@@ -14,27 +16,54 @@ from itertools import combinations
 """
 
 
-def count_case(coordinations_list):
+def count_case(coordination_list):
     global grid
 
-    for coordinations in coordinations_list:
+    cnt = 0
+    for coordinations in coordination_list:
         for coord in coordinations:
             grid[coord[0]][coord[1]] = 1
 
-    cnt = 0
-    for r in range(N - 2):
-        for c in range(M - 2):
-            if sum(grid[r, c] + grid[r + 1][c] + grid[r][c + 1] + grid[r + 1][c + 1]) == 4:
-                continue
+        for r in range(N - 2):
+            for c in range(M - 2):
+                if sum(grid[r][c] + grid[r + 1][c] + grid[r][c + 1] + grid[r + 1][c + 1]) == 4:
+                    continue
+        pprint(grid)
+        cnt += 1
+    return cnt
 
-            cnt += 1
+
+def count(coordination_list):
+    global grid
+    _next = False
+    cnt = 0
+    while coordination_list:
+        _next=False
+        nemmo_pos = set(coordination_list.pop())
+        # 넴모 배치
+        for r in range(N):
+            for c in range(M):
+                if (r,c) in nemmo_pos:
+                    grid[r][c] = 1
+                else:
+                    grid[r][c] = 0
+
+        for r in range(N-1):
+            for c in range(M-1):
+                if (grid[r][c] + grid[r + 1][c] + grid[r][c + 1] + grid[r + 1][c + 1]) == 4:
+                    _next = True
+                    break
+            if _next: break
+        if _next: continue
+        cnt += 1
     return cnt
 
 
 def main():
-    global N, M
+    global N, M, grid
     N, M = map(int, input().split())
     # 행 혹은 열의 길이가 1인 경우 2x2 넴모 배치가 불가능하다.
+    grid = [[0 for _ in range(M)] for _ in range(N)]
     if N == 1:
         print(2 ** M)
         return
@@ -47,29 +76,23 @@ def main():
         for c in range(M):
             coordinations.append((r, c))
 
-    print(coordinations)
-
-    result = 0
+    nemmo_pos = []
     for i in range(2, N * M):
-        print(i)
-        nemmo_pos = list(combinations(coordinations, i))
-        print(nemmo_pos)
-        print("*"*50)
+        nemmo_pos.extend(list(combinations(coordinations, i)))
 
-        # result += count_case(nemmo_pos)
-
+    result = count(nemmo_pos)
+    # 한 칸에만 넴모가 존재하는 경우
+    result += N*M
+    # 아무 칸에도 넴모가 없는 경우
+    result += 1
     print(result)
 
 
 if __name__ == "__main__":
-    # n = 25
-    # sum_ = 0
-    # for i in range(1, 26):
-    #     len_ = len(list(combinations(range(25), i)))
-    #     print(len_)
-    #     sum_ += len_
-    #
-    # print(sum_)
+    import time
+    start = time.time()
     N, M = 0, 0
-    grid = None
+    grid = list()
     main()
+    end = time.time()
+    print(f"{end - start:.5f} sec")
