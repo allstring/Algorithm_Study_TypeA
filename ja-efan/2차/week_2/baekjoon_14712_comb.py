@@ -96,4 +96,4 @@ if __name__ == "__main__":
     grid = list()
     main()
     end = time.time()
-    print(f"{end - start:.5f} sec")
+    # print(f"{end - start:.5f} sec")
