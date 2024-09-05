@@ -28,7 +28,7 @@ def is_all_visited(vertex):
     return True
 
 
-def dfs(current_vertex, acc_weight, ):
+def dfs(current_vertex, acc_weight):
     global diameter, vertex_A, visited
     # 탈출 조건:
     # 인접한 정점이 없거나,
