@@ -8,8 +8,9 @@
 
 """
 
+
 def dfs(curr_pos):
-    global cnt, grid, stop_flag
+    global cnt, grid
     # 좌표 끝까지 돈 경우
     if curr_pos[0] == N:
         cnt += 1  # 개수 추가
