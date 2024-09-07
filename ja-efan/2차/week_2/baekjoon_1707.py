@@ -1,56 +1,50 @@
 # 이분 그래프
+# Bipartite Graph
 # Gold IV
+"""
+접근법:
+    완탐(bfs) 돌면서 하나는 red, 하나는 blue에 넣는다.
+    두 노드가 같은 색으로 칠해진 경우: 이분 그래프 형성 불가
+"""
+from collections import defaultdict, deque
 
-class DisjointSet:
-    def __init__(self, num_v):
-        self.head = [0 for _ in range(num_v+1)]
-        self.rank = [0 for _ in range(num_v+1)]
-
-    def _make_set(self, v):
-        self.head[v] = v
-
-    def make_set_all(self):
-        n = len(self.head)
-        for v in range(n):
-            self._make_set(v)
-
-    def find_head(self, v):
-        if self.head[v] != v:
-            self.head[v] = self.find_head(self.head[v])
-        return self.head[v]
-
-    def union(self, v, u):
-        head_of_v = self.head[v]
-        head_of_u = self.head[u]
-        if head_of_v != head_of_u:
-            if self.rank[head_of_v] > self.rank[head_of_u]:
-                self.head[head_of_u] = head_of_v
-            elif self.rank[head_of_v] < self.rank[head_of_u]:
-                self.head[head_of_v] = head_of_u
-            else:
-                self.head[head_of_v] = head_of_u
-                self.rank[head_of_u] += 1
-
-
-def bipartite_graph():
+def bipartite():
     V, E = map(int, input().split())
     edges = [list(map(int, input().split())) for _ in range(E)]
-    ds = DisjointSet(V)
-    ds.make_set_all()
+    adj_dict = defaultdict(list)
+    colors = [0 for _ in range(V+1)]  # 1 or 2
     for v, u in edges:
-        ds.union(v, u)
+        adj_dict[v].append(u)
+        adj_dict[u].append(v)
 
-    for i in range(1, V+1):
-        ds.find_head(i)
-    print(ds.head)
-    print(len(set(ds.head)))
+    src = 1
+    colors[1] = 1
+    stack = [src]
+    while stack:
+        tmp_stack = list()
+        while stack:
+            curr_vertex = stack.pop()
+            curr_color = colors[curr_vertex]
+            for adj_vertex in adj_dict[curr_vertex]:
+                if not colors[adj_vertex]:
+                    colors[adj_vertex] = curr_color % 2 + 1
+                    tmp_stack.append(adj_vertex)
+                elif colors[adj_vertex] != curr_color:
+                    continue
+                else:
+                    # 인접한 두 정점의 색이 같은 경우
+                    # 바로 함수 종료
+                    return 'NO'
+        stack = tmp_stack
+    # print(colors)
+    return 'YES'
 
 
 def main():
     K = int(input())
-    for k in range(K):
-        bipartite_graph()
-
+    for tc in range(1, K+1):
+        result = bipartite()
+        print(result)
 
 if __name__ == "__main__":
     main()
