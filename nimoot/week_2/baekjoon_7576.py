@@ -35,12 +35,14 @@ else: # 시작을 1로 했으니 max_days에서 1빼고 출력
     max_days = max(max(row) for row in tomatos)
     print(max_days - 1)
 
-# max_days = 0
-# for i in range(row):
-#     for j in range(col):
-#         if tomatos[i][j] == 0:
-#             print(-1)
-#             exit()
-#         max_days = max(max_days, tomatos[i][j])
+''' 출력 방법 수정
+max_days = 0
+for i in range(row):
+    for j in range(col):
+        if tomatos[i][j] == 0:
+            print(-1)
+            exit()
+        max_days = max(max_days, tomatos[i][j])
 
-# print(max_days - 1)
+print(max_days - 1)
+'''
