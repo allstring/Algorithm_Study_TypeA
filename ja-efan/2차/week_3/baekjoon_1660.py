@@ -17,12 +17,14 @@ def main():
     # memoization 배열 초기화
     memo = [[0 for _ in range(N+1)]]
     k = 1
-    while k_prime_list[k] <= N:
+    while k_prime_list[k] < N:
         if k == 1:
             memo.append([i for i in range(N+1)])
         else:
             memo.append([0 for _ in range(N+1)])
         k += 1
+        # if k_prime_list[k+1] == N:
+        #     memo.append([0 for _ in range(N+1)])
     # memo.append([0 for _ in range(N+1)])
     print(f"shape: {len(memo), len(memo[0])}")
 
