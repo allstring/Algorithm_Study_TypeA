@@ -27,6 +27,7 @@ def main():
     # 바닥면(0) 북쪽(1) 동쪽(2) 남쪽(3) 서쪽(4) 윗면(5)
     dice_nums = [0, 0, 0, 0, 0, 0]
 
+    # 현재 위치
     cur_x = x
     cur_y = y
     if map_num[cur_x][cur_y] == 0:
@@ -34,32 +35,36 @@ def main():
     else:
         dice_nums[0] = map_num[cur_x][cur_y]
         map_num[cur_x][cur_y] = 0
+
+    #주어진 command들 (방향)에 대해서 반복
     for cmd in command:
-        flag = 0
-        if cmd == 1:
+        flag = 0 #실제 회전이 이루어졌는지의 여부 플래그 (경계 확인)
+        if cmd == 1: #동쪽방향 회전
             if cur_y < M - 1:
                 flag = 1
                 cur_y += 1
                 dice_nums = rotate(dice_nums, cmd)
-        elif cmd == 2:
+        elif cmd == 2: #서쪽방향 회전
             if cur_y > 0:
                 flag = 1
                 cur_y -= 1
                 dice_nums = rotate(dice_nums, cmd)
-        elif cmd == 3:
+        elif cmd == 3:  #북쪽방향 회전
             if cur_x > 0:
                 flag = 1
                 cur_x -= 1
                 dice_nums = rotate(dice_nums, cmd)
-        elif cmd == 4:
+        elif cmd == 4: #남쪽방향 회전
             if cur_x < N - 1:
                 flag = 1
                 cur_x += 1
                 dice_nums = rotate(dice_nums, cmd)
         if flag == 1:
             if map_num[cur_x][cur_y] == 0:
+                # 이동한 칸에 쓰여 있는 수가 0이면, 주사위의 바닥면에 쓰여 있는 수가 칸에 복사된다.
                 map_num[cur_x][cur_y] = dice_nums[0]
             else:
+                # 0이 아닌 경우에는 칸에 쓰여 있는 수가 주사위의 바닥면으로 복사되며, 칸에 쓰여 있는 수는 0이 된다.
                 dice_nums[0] = map_num[cur_x][cur_y]
                 map_num[cur_x][cur_y] = 0
             print(dice_nums[5])
