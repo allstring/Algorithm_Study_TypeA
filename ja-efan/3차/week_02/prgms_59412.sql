@@ -1,0 +1,12 @@
+# 241010
+# lv 2
+# 입양 시각 구하기 (1)
+
+SELECT HOUR, COUNT(*) AS "COUNT"
+FROM (
+    SELECT *, HOUR(datetime) AS "HOUR"
+    FROM animal_outs
+) AS ao
+WHERE HOUR BETWEEN 9 AND 19
+GROUP BY HOUR
+ORDER BY HOUR;
