@@ -7,4 +7,4 @@ SELECT
 FROM 
   item_info
 WHERE 1 = 1 
-  rarity = 'LEGEND';
+  AND rarity = 'LEGEND';
