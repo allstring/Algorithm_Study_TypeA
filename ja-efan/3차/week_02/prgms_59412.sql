@@ -13,7 +13,7 @@ FROM
         FROM 
             animal_outs
     ) AS ao
-WHERE 
+WHERE 1 = 1
     hour BETWEEN 9 AND 19
 GROUP BY 
     hour
