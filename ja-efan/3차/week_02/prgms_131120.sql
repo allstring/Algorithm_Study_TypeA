@@ -7,9 +7,11 @@ SELECT
     member_name,
     gender,
     DATE_FORMAT(date_of_birth, "%Y-%m-%d") AS 'date_of_birth'
-FROM member_profile
-WHERE 
-    gender = 'W'
+FROM 
+    member_profile
+WHERE 1 = 1
+    AND gender = 'W'
     AND MONTH(date_of_birth) = 3
-    AND TLNO IS NOT NULL
-ORDER BY member_id;
+    AND tlno IS NOT NULL
+ORDER BY 
+    member_id ASC;
