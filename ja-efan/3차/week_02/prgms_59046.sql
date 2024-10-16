@@ -9,6 +9,6 @@ SELECT
 FROM 
   animal_ins 
 WHERE 1 = 1 
-  name IN ("Lucy", "Ella", "Pickle", "Rogan", "Sabrina", "Mitty")
+  AND name IN ("Lucy", "Ella", "Pickle", "Rogan", "Sabrina", "Mitty")
 ORDER BY 
   animal_id ASC;
