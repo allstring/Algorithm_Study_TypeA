@@ -4,13 +4,23 @@
 
 SELECT
     p.product_code,
-    (p.price * os.total_sales_amount) AS 'sales'
-FROM product AS p
-INNER JOIN (
-    SELECT product_id, SUM(sales_amount) AS total_sales_amount
-    FROM offline_sale 
-    GROUP BY product_id
-) AS os
-ON p.product_id = os.product_id
-GROUP BY p.product_code
-ORDER BY sales DESC, product_code ASC;
+    (p.price * os.total_sales_amount) AS `sales`
+FROM 
+    product AS p
+INNER JOIN 
+    (
+        SELECT 
+            product_id, 
+            SUM(sales_amount) AS total_sales_amount
+        FROM 
+            offline_sale 
+        GROUP BY 
+            product_id
+    ) AS os
+ON 
+    p.product_id = os.product_id
+GROUP BY 
+    p.product_code
+ORDER BY 
+    sales DESC, 
+    product_code ASC;
