@@ -8,7 +8,7 @@ SELECT
 FROM 
     animal_ins 
 WHERE 1 = 1
-    animal_type = "dog"
+    AND animal_type = "dog"
     AND (name LIKE "%el%" OR name LIKE "%EL%")
 ORDER BY 
     name ASC;
